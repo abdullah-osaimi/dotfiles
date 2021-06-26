@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+dir=~/Projects/dotfiles
+olddir=$HOME/dotfiles_old
+config_files="alacritty i3 compton.conf"
+home_files=".vim"
+
+
+echo "Creating $olddir for backup of any existing dotfiles in $HOME"
+mkdir -p ${olddir}/.config
+
+
+echo "Changing to the $dir directory"
+cd $dir
+
+
+echo "Moving any existing dotfiles from $HOME to $olddir"
+for file in $home_files; do
+	if [[ -e "$HOME/$file" ]]; then
+		echo "Found $file in HOME, Moving it to $HOME/dotfiles_old"
+		mv $HOME/$file $HOME/dotfiles_old
+	fi
+	ln -s $PWD/$file ~/$file
+done
+
+
+echo "Moving any existing directory from ${HOME}/.config to ${olddir}/.config"
+for file in $config_files; do
+	if [[ -e "$HOME/.config/$file" ]]; then
+		echo "Found $file in HOME/.config, Moving it to $HOME/dotfiles_old/.config"
+		mv $HOME/.config/$file $HOME/dotfiles_old/.config
+	fi
+	ln -s $PWD/$file ~/.config/$file
+done
