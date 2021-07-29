@@ -188,13 +188,13 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 workspace_auto_back_and_forth yes
 
 exec --no-startup-id i3-msg 'workspace 1; exec google-chrome --restore-last-session;'
-exec --no-startup-id i3-msg 'workspace 2; exec gnome-terminal; workspace 1'
+exec --no-startup-id i3-msg 'workspace 2; exec alacritty; workspace 1'
 
 
-set $i3lockwall i3lock -c 000000 
+set $i3lockwall i3lock -c 000000
 bindsym Mod4+l exec --no-startup-id $i3lockwall
 
 # random background image
 exec_always feh --bg-fill --randomize ~/wallpaper/*
 
-exec_always --no-startup-id compton 
+exec_always --no-startup-id compton
